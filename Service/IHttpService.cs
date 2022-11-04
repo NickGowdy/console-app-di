@@ -1,4 +1,4 @@
 public interface IHttpService
 {
-    Task<string> Request();
+    Task<T?> Request<T>() where T : class;
 }

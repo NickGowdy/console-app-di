@@ -1,3 +1,5 @@
+using ConsoleAppDI.Models;
+
 namespace ConsoleAppDI
 {
     public class Application
@@ -10,7 +12,7 @@ namespace ConsoleAppDI
 
         public async Task Start()
         {
-            var response = await _httpService.Request();
+            var response = await _httpService.Request<WeatherResponse>();
             Console.WriteLine("***************************");
             Console.WriteLine(response);
             Console.WriteLine("***************************");
