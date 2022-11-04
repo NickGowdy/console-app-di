@@ -1,4 +1,6 @@
-﻿using ConsoleAppDI.Service;
+﻿using ConsoleAppDI.Config;
+using ConsoleAppDI.Service;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -15,11 +17,18 @@ namespace ConsoleAppDI
 
         static IHostBuilder CreateHostBuilder(string[] args)
         {
-            return Host.CreateDefaultBuilder(args)
-                .ConfigureServices(
+            var host = Host.CreateDefaultBuilder(args)
+           .ConfigureAppConfiguration((hostingContext, cfg) =>
+           {
+               var env = hostingContext.HostingEnvironment;
+
+           }).ConfigureServices(
                     (_, services) => services
                         .AddSingleton<Application, Application>()
                         .AddSingleton<IHttpService, HttpService>());
+
+
+            return host;
         }
     }
 }
